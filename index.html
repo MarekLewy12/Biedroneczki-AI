@@ -13,7 +13,10 @@
 
 <body>
   <header class="header">
-    <img src="img/zut_logo.png" alt="Logo ZUT-u">
+    <div class="header-logo">
+      <img src="img/zut_logo.png" alt="Logo ZUT-u">
+      
+    </div>
 
     <div class="buttons">
       <div class="button-container">
@@ -26,7 +29,7 @@
         <img src="img/font_increase.png" alt="Przycisk do zwiększania czcionki">
       </div>
       <div class="button-container">
-        <img src="img/dark-mode.png" alt="Przycisk do zmiany trybu nocnego">
+        <img src="img/dark-mode.png" alt="Przycisk do zmiany trybu nocnego" id="darkModeToggle">
       </div>
     </div>
   </header>
@@ -35,23 +38,50 @@
     <div class="main-container">
       <aside class="sidebar">
         <div class="search-form">
-          <!-- Filtry... -->
+          <label for="lecturer">Wykładowca</label>
+          <input type="text" id="lecturer" name="lecturer">
+
+          <label for="subject">Przedmiot</label>
+          <input type="text" id="subject" name="subject">
+
+          <label for="room">Sala</label>
+          <input type="text" id="room" name="room">
+
+          <label for="group">Numer grupy</label>
+          <input type="text" id="group" name="group">
+
+          <label for="album">Numer Albumu</label>
+          <input type="text" id="album" name="album">
+
+          <div class="form-buttons">
+            <button class="search-button">Szukaj</button>
+            <button class="reset-button">Wyczyść</button>
+          </div>
         </div>
       </aside>
 
       <section class="schedule-container">
+        <div class="schedule-header">
+          <button class="nav-button">&larr;</button>
+          <span class="current-date">Data</span>
+          <button class="nav-button">&rarr;</button>
+
+          <button class="today-button">Dzisiaj</button>
+
+          <div class="view-buttons">
+            <button class="view-button">Dzień</button>
+            <button class="view-button">Tydzień</button>
+            <button class="view-button">Miesiąc</button>
+          </div>
+        </div>
+
         <div class="schedule-grid">
-          <!-- Przyciski do nawigacji i plan...-->
+          <!-- Grid będzie tutaj wypełniany treścią planu -->
         </div>
       </section>
     </div>
   </main>
 
-    <!-- Atrybucje do ikon -->
-    <!--<a href="https://www.flaticon.com/free-icons/dark-mode" title="dark mode icons">Dark mode icons created by Marz Gallery - Flaticon</a>-->
-    <!--<a href="https://www.freepik.com/search">Icon by HideMaru</a>-->
-    <!--<a href="https://www.flaticon.com/free-icons/poland-country" title="poland country icons">Poland country icons created by Md Tanvirul Haque - Flaticon</a>-->
-    <!--<a href="https://www.freepik.com/search">Icon by Bogdan Rosu</a>-->
   <script src="js/app.js"></script>
 </body>
 

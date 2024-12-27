@@ -1,7 +1,9 @@
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  font-family: Arial, sans-serif;
 }
 
 html {
@@ -14,7 +16,7 @@ body {
   padding: 5rem;
 }
 
-/* Header */
+/* Nagłówek */
 .header {
   display: flex;
   justify-content: space-between;
@@ -32,7 +34,6 @@ body {
   gap: 15px;
 }
 
-
 .button-container {
   background-color: #e6e6e6;
   border-radius: 50%;
@@ -45,14 +46,13 @@ body {
   transition: transform 0.3s, background-color 0.3s;
 }
 
-/* przy najechaniu na przycisk - lekko się zwiększa i zmienia kolor */
 .button-container:hover {
   cursor: pointer;
   transform: scale(1.1);
   background-color: #d9d9d9;
 }
 
-.button-container.font-increase img{
+.button-container.font-increase img {
   height: 30px;
   width: auto;
 }
@@ -62,7 +62,7 @@ body {
   max-height: 100%;
 }
 
-/* Main */
+/* Main Content */
 .main {
   padding: 2rem;
 }
@@ -95,3 +95,96 @@ body {
   border-radius: 8px;
 }
 
+/* Sidebar Search Form */
+.search-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  padding: 1rem;
+}
+
+.search-form label {
+  font-weight: bold;
+  font-size: 0.9rem;
+  color: #555;
+}
+
+.search-form input {
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 0.9rem;
+}
+
+.form-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* Przyciski - Szukaj, Strzałki, Dzisiaj, Dzień, Tydzień, Miesiąc */
+.search-button,
+.nav-button,
+.today-button,
+.view-button,
+.reset-button { 
+  background-color: #5c6bc0; 
+  color: white; 
+  border: none;
+  border-radius: 15px; 
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  font-size: 0.9rem;
+}
+
+.search-button:hover,
+.nav-button:hover,
+.today-button:hover,
+.view-button:hover,
+.reset-button:hover {
+  background-color: #3f51b5; 
+}
+
+/* Przycisk 'Wyczyść' */
+.reset-button {
+  background-color: #ec7f88; 
+  color: #721c24; 
+}
+
+.reset-button:hover {
+  background-color: #f45a69; 
+}
+
+/* Schedule Header */
+.schedule-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #f5f5f5;
+  padding: 1rem;
+  border-radius: 8px;
+}
+
+.current-date {
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+/* View Buttons */
+.view-buttons {
+  display: flex;
+  gap: 10px;
+}
+
+.view-button {
+  background-color: #6c757d;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.view-button:hover {
+  background-color: #5a6268;
+}
