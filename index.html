@@ -16,7 +16,7 @@
   <header class="header">
     <div class="header-logo">
       <img src="img/zut_logo.png" alt="Logo ZUT-u">
-      
+
     </div>
 
     <div class="buttons">
@@ -28,7 +28,7 @@
       </div>
       <div class="button-container font-increase">
         <img src="img/font_increase.png" alt="Przycisk do zwiększania czcionki" id="fontIncreaseButton">
-      </div>      
+      </div>
       <div class="button-container">
         <img src="img/dark-mode.png" alt="Przycisk do zmiany trybu nocnego" id="darkModeToggle">
       </div>
@@ -63,16 +63,22 @@
 
       <section class="schedule-container">
         <div class="schedule-header">
-          <button class="nav-button">&larr;</button>
-          <span class="current-date">Data</span>
-          <button class="nav-button">&rarr;</button>
+          <div class="left-nav">
+            <button class="nav-button">&larr;</button>
+            <span class="current-date">Data</span>
+            <button class="nav-button">&rarr;</button>
+          </div>
 
-          <button class="today-button">Dzisiaj</button>
+          <div class="center-nav">
+            <button class="today-button">Dzisiaj</button>
+          </div>
 
+          <div class="right-nav">
           <div class="view-buttons">
             <button class="view-button">Dzień</button>
             <button class="view-button">Tydzień</button>
             <button class="view-button">Miesiąc</button>
+          </div>
           </div>
         </div>
 

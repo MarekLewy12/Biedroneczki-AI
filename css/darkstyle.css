@@ -4,40 +4,40 @@
     box-sizing: border-box;
     font-family: Arial, sans-serif;
   }
-  
+
   html {
-    color: #e0e0e0; 
+    color: #e0e0e0;
     font-size: 1em;
     line-height: 1.4;
   }
-  
+
   body {
     padding: 5rem;
-    background-color: #121212; 
-    color: #e0e0e0; 
+    background-color: #121212;
+    color: #e0e0e0;
   }
-  
+
   /* Nagłówek */
   .header {
     display: flex;
     justify-content: space-between;
     align-items: center;
     width: 100%;
-    background-color: #121212; 
+    background-color: transparent;
   }
-  
+
   .header img {
     height: 50px;
     width: auto;
   }
-  
+
   .buttons {
     display: flex;
     gap: 15px;
   }
-  
+
   .button-container {
-    background-color: #333; 
+    background-color: #636363;
     border-radius: 50%;
     padding: 5px;
     height: 50px;
@@ -47,41 +47,41 @@
     align-items: center;
     transition: transform 0.3s, background-color 0.3s;
   }
-  
+
   .button-container:hover {
     cursor: pointer;
     transform: scale(1.1);
-    background-color: #555; 
+    background-color: #555;
   }
-  
+
   .button-container.font-increase img {
     height: 30px;
     width: auto;
   }
-  
+
   .button-container img {
     max-width: 100%;
     max-height: 100%;
   }
-  
+
   /* Main Content */
   .main {
     padding: 2rem;
   }
-  
+
   .main-container {
     display: flex;
     gap: 2rem;
   }
-  
+
   /* Sidebar */
   .sidebar {
     width: 300px;
     min-height: 600px;
-    background-color: #2a2a2a; 
+    background-color: #2a2a2a;
     border-radius: 8px;
   }
-  
+
   /* Schedule */
   .schedule-container {
     flex: 1;
@@ -89,14 +89,14 @@
     flex-direction: column;
     gap: 1rem;
   }
-  
+
   .schedule-grid {
     flex: 1;
     min-height: 500px;
-    background-color: #1d1d1d; 
+    background-color: #1d1d1d;
     border-radius: 8px;
   }
-  
+
   /* Sidebar Search Form */
   .search-form {
     display: flex;
@@ -104,83 +104,90 @@
     gap: 15px;
     padding: 1rem;
   }
-  
+
   .search-form label {
     font-weight: bold;
     font-size: 0.9rem;
-    color: #ddd; 
+    color: #ddd;
   }
-  
+
   .search-form input {
     padding: 0.5rem;
-    border: 1px solid #555; 
+    border: 1px solid #555;
     border-radius: 5px;
     font-size: 0.9rem;
-    background-color: #333; 
-    color: #e0e0e0; 
+    background-color: #333;
+    color: #e0e0e0;
   }
-  
+
   .form-buttons {
     display: flex;
     flex-direction: column;
     gap: 10px;
   }
-  
+
   /* Przyciski - Szukaj, Strzałki, Dzisiaj, Dzień, Tydzień, Miesiąc */
   .search-button,
   .nav-button,
   .today-button,
   .view-button,
-  .reset-button { 
-    background-color: #5c6bc0; 
-    color: white; 
+  .reset-button {
+    background-color: #5c6bc0;
+    color: white;
     border: none;
-    border-radius: 15px; 
+    border-radius: 15px;
     padding: 0.5rem 1rem;
     cursor: pointer;
     font-size: 0.9rem;
   }
-  
+
   .search-button:hover,
   .nav-button:hover,
   .today-button:hover,
   .view-button:hover,
   .reset-button:hover {
-    background-color: #3f51b5; 
+    background-color: #3f51b5;
   }
-  
+
   /* Przycisk 'Wyczyść' */
   .reset-button {
-    background-color: #ec7f88; 
-    color: #721c24; 
+    background-color: #ec7f88;
+    color: #721c24;
   }
-  
+
   .reset-button:hover {
-    background-color: #f45a69; 
+    background-color: #f45a69;
   }
-  
+
   /* Schedule Header */
   .schedule-header {
     display: flex;
-    justify-content: space-between;
     align-items: center;
-    background-color: #2a2a2a; 
+    background-color: #2a2a2a;
     padding: 1rem;
     border-radius: 8px;
   }
-  
+
+  .left-nav,
+  .center-nav,
+  .right-nav {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
   .current-date {
     font-size: 1.2rem;
     font-weight: bold;
-    color: #fff; 
+    color: #fff;
   }
-  
+
   /* View Buttons */
   .view-buttons {
     display: flex;
     gap: 10px;
   }
-  
+
   .view-button {
     background-color: #6c757d;
     color: white;
@@ -189,8 +196,120 @@
     border-radius: 5px;
     cursor: pointer;
   }
-  
+
   .view-button:hover {
     background-color: #5a6268;
   }
-  
+
+/* Responsywność dla urządzeń mobilnych */
+@media (max-width: 1024px) {
+  body {
+    padding: 0.5rem;
+  }
+
+  .header {
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .header img {
+    height: 50px;
+    width: auto;
+  }
+
+  .main {
+    padding: 1rem;
+  }
+
+  .main-container {
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .sidebar {
+    width: 100%;
+    min-height: auto;
+  }
+
+  .schedule-container {
+    width: 100%;
+    overflow: hidden;
+  }
+
+  .current-date {
+    font-size: 0.8rem;
+  }
+
+  .view-buttons {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .schedule-grid {
+    min-height: 350px;
+  }
+
+  .search-form {
+    padding: 0.5rem;
+  }
+
+  .search-form input {
+    font-size: 0.8rem;
+  }
+
+  .search-form label {
+    font-size: 1rem;
+  }
+
+  .form-buttons {
+    flex-direction: row;
+    justify-content: center;
+    margin-bottom: 1rem;
+    gap: 5rem;
+  }
+
+  .form-buttons button {
+    font-size: 1.6rem;
+  }
+
+  .search-button,
+  .nav-button,
+  .today-button,
+  .view-button,
+  .reset-button {
+    padding: 0.3rem 0.7rem;
+    font-size: 1.6rem;
+  }
+
+  .current-date {
+    font-size: 1.6rem;
+  }
+
+}
+
+/* Responsywność dla średnich ekranów */
+@media (max-width: 768px) {
+  .search-button,
+  .nav-button,
+  .today-button,
+  .view-button,
+  .reset-button {
+    padding: 0.8rem;
+    font-size: 0.8rem;
+  }
+
+  .header img {
+    height: 30px;
+    width: auto;
+  }
+
+  .form-buttons button {
+    font-size: 1rem;
+  }
+
+  .current-date {
+    font-size: 1rem;
+  }
+
+}
