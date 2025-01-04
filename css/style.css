@@ -83,6 +83,7 @@ body {
 .main-container {
   display: flex;
   gap: 2rem;
+  /*max-width: 1200px;*/
 }
 
 /* Sidebar */
@@ -104,7 +105,6 @@ body {
 .schedule-grid {
   flex: 1;
   min-height: 500px;
-  background-color: #f5f5f5;
   border-radius: 8px;
 }
 
@@ -327,4 +327,38 @@ body {
     font-size: 1rem;
   }
 
+}
+
+/* CALENDAR LIGHT MODE */
+
+#calendar {
+  background-color: #fff;
+  border-radius: 5px;
+}
+
+#calendar .fc-toolbar {
+  background-color: #f5f5f5;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+#calendar .fc-view-harness {
+  margin-top: 10px;
+  max-height: 700px;
+}
+
+/* Kolor tła przycisków */
+.fc .fc-button-primary {
+  background-color: #5c6bc0;
+  border-color: #3f51b5;
+  color: #fff;
+}
+
+.fc .fc-button-primary:hover {
+  background-color: #3f51b5;
+}
+
+.fc .fc-toolbar-title {
+  font-size: 1em;
+  margin: 0;
 }

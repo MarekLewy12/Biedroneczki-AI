@@ -317,3 +317,37 @@
   }
 
 }
+
+/* CALENDAR DARK MODE */
+
+#calendar {
+  background-color: #121212;
+  border-radius: 5px;
+}
+
+#calendar .fc-toolbar {
+  background-color: #2a2a2a;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+#calendar .fc-view-harness {
+  margin-top: 10px;
+  max-height: 700px;
+}
+
+/* Kolor tła przycisków */
+.fc .fc-button-primary {
+  background-color: #5c6bc0;
+  border-color: #3f51b5;
+  color: #fff;
+}
+
+.fc .fc-button-primary:hover {
+  background-color: #3f51b5;
+}
+
+.fc .fc-toolbar-title {
+  font-size: 1em;
+  margin: 0;
+}
