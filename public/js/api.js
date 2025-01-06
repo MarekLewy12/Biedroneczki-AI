@@ -1,28 +1,26 @@
-// Opis: Moduł zawierający funkcje do komunikacji z backendem
 export async function fetchData(formData) {
   try {
-    // Wysyłanie zapytania do backendu
-    const response = await fetch('/backend/api/fetch_from_api.php', {
+    // Wysłanie zapytania POST do endpointa /search
+    const response = await fetch('/search', {
       method: 'POST',
       body: formData,
     });
 
-    // Obsługa błędów odpowiedzi
+    // Obsługa błędów
     if (!response.ok) {
       throw new Error(`Błąd: ${response.status} - ${response.statusText}`);
     }
 
-    // Parsowanie odpowiedzi JSON
+    // Odpowiedź z serwera
     const data = await response.json();
-
-    // Jeśli dane są puste, zwróć komunikat
-    if (!data || data.length === 0) {
+    if (!data || data.length === 0) {  // sprawdzenie czy zwrócone dane nie są puste
       throw new Error('Brak wyników do wyświetlenia.');
     }
 
+    // Zwrócenie danych
     return data;
   } catch (error) {
     console.error('Wystąpił błąd w fetchData:', error.message);
-    throw error; // Przekaż błąd dalej
+    throw error;
   }
 }
