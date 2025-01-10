@@ -37,6 +37,8 @@ if (strpos($_SERVER['REQUEST_URI'], '/search') === 0) {
   <title>Lepszy Plan - ZUT</title>
   <link rel="stylesheet" href="css/style.css">
   <link id="darkStyle" rel="stylesheet" href="css/darkstyle.css" disabled>
+  <link id="cb1" rel="stylesheet" href="css/yellowBlack.css" disabled>
+  <link id="cb2" rel="stylesheet" href="css/blackYellow.css" disabled>
   <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.15/index.global.min.js'></script>
 </head>
 <body>

@@ -1,4 +1,44 @@
 import { fetchData } from "./api.js";
+// ------------------------------
+// TRYB DLA DALTONISTOW
+// ------------------------------
+const colorBlindModeToggle = document.getElementById('colorBlindModeToggle');
+const yellowBlackStyleLink = document.getElementById('cb1');
+const blackYellowStyleLink = document.getElementById('cb2');
+
+// Początkowy stan trybu
+let currentMode = 'base'; // Możliwe wartości: 'base', 'yellowBlack', 'blackYellow'
+
+const toggleColorBlindMode = () => {
+  if (currentMode === 'base') {
+    // Przejdź do trybu Yellow-Black
+    yellowBlackStyleLink.disabled = false;
+    blackYellowStyleLink.disabled = true;
+    currentMode = 'yellowBlack';
+  } else if (currentMode === 'yellowBlack') {
+    // Przejdź do trybu Black-Yellow
+    yellowBlackStyleLink.disabled = true;
+    blackYellowStyleLink.disabled = false;
+    currentMode = 'blackYellow';
+  } else {
+    // Wróć do trybu domyślnego
+    yellowBlackStyleLink.disabled = true;
+    blackYellowStyleLink.disabled = true;
+    currentMode = 'base';
+  }
+};
+
+// Podłączenie funkcji do przycisku
+colorBlindModeToggle.addEventListener('click', toggleColorBlindMode);
+
+
+
+
+
+
+
+
+
 
 
 // ------------------------------

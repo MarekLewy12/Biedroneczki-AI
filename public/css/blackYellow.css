@@ -1,0 +1,322 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+}
+
+html {
+  color: #FFFFFF;
+  font-size: 1em;
+  line-height: 1.4;
+}
+
+body {
+  padding: 80px;
+  background-color: rgba(255, 255, 0, 0.8);
+  color: #000000;
+}
+
+/* Nagłówek */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  background-color: rgba(255, 255, 0, 0.8);
+}
+
+.header img {
+  height: 50px;
+  width: auto;
+}
+
+.buttons {
+  display: flex;
+  gap: 15px;
+}
+
+.button-container {
+  background-color: rgba(51, 51, 51, 0.8);
+  border-radius: 50%;
+  padding: 5px;
+  height: 50px;
+  width: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: transform 0.3s, background-color 0.3s;
+}
+
+.button-container:hover {
+  cursor: pointer;
+  transform: scale(1.1);
+  background-color: rgba(42, 42, 42, 0.8);
+}
+
+.button-container img {
+  max-width: 100%;
+  max-height: 100%;
+}
+
+/* Informacja o skali czcionki */
+.font-scale-info {
+  color: #FFFF00;
+}
+
+/* Main Content */
+.main {
+  padding: 32px;
+}
+
+.main-container {
+  display: flex;
+  gap: 2rem;
+}
+
+/* Sidebar */
+.sidebar {
+  width: 300px;
+  min-height: 600px;
+  background-color: rgba(51, 51, 51, 0.8);
+  border-radius: 8px;
+}
+
+/* Schedule */
+.schedule-container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.schedule-grid {
+  flex: 1;
+  min-height: 500px;
+  background-color: rgba(51, 51, 51, 0.8);
+  border-radius: 8px;
+}
+
+/* Sidebar Search Form */
+.search-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  padding: 16px;
+}
+
+.search-form label {
+  font-weight: bold;
+  font-size: 0.9rem;
+  color: #FFFFFF;
+}
+
+.search-form input {
+  padding: 8px;
+  border: 1px solid rgba(169, 169, 169, 0.8);
+  border-radius: 5px;
+  font-size: 0.9rem;
+  background-color: rgba(211, 211, 211, 0.8);
+  color: #FFFFFF;
+}
+
+.form-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* Buttons */
+.search-button,
+.nav-button,
+.today-button,
+.view-button,
+.reset-button {
+  background-color: rgba(51, 51, 51, 0.8);
+  color: #FFFFFF;
+  border: none;
+  border-radius: 15px;
+  padding: 8px 16px;
+  cursor: pointer;
+  font-size: 0.9rem;
+}
+
+.search-button:hover,
+.nav-button:hover,
+.today-button:hover,
+.view-button:hover,
+.reset-button:hover {
+  background-color: rgba(42, 42, 42, 0.8);
+}
+
+/* Reset Button */
+.reset-button {
+  background-color: rgba(255, 182, 193, 0.8);
+  color: #FFFFFF;
+}
+
+.reset-button:hover {
+  background-color: rgba(255, 105, 180, 0.8);
+}
+
+/* Schedule Header */
+.schedule-header {
+  display: flex;
+  align-items: center;
+  background-color: rgba(51, 51, 51, 0.8);
+  padding: 16px;
+  border-radius: 8px;
+}
+
+.left-nav,
+.center-nav,
+.right-nav {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.current-date {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #FFFFFF;
+}
+
+/* View Buttons */
+.view-buttons {
+  display: flex;
+  gap: 10px;
+}
+
+.view-button {
+  background-color: rgba(51, 51, 51, 0.8);
+  color: #FFFFFF;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.view-button:hover {
+  background-color: rgba(42, 42, 42, 0.8);
+}
+
+/* Responsywność dla urządzeń mobilnych */
+@media (max-width: 1024px) {
+  body {
+    padding: 8px;
+  }
+
+  .header {
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .header img {
+    height: 50px;
+    width: auto;
+  }
+
+  .main {
+    padding: 16px;
+  }
+
+  .main-container {
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .sidebar {
+    width: 100%;
+    min-height: auto;
+  }
+
+  .schedule-container {
+    width: 100%;
+    overflow: hidden;
+  }
+
+  .current-date {
+    font-size: 0.8rem;
+  }
+
+  .view-buttons {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .schedule-grid {
+    min-height: 350px;
+  }
+
+  .search-form {
+    padding: 8px;
+  }
+
+  .search-form input {
+    font-size: 0.8rem;
+  }
+
+  .search-form label {
+    font-size: 1rem;
+  }
+
+  .form-buttons {
+    flex-direction: row;
+    justify-content: center;
+    margin-bottom: 1rem;
+    gap: 5rem;
+  }
+
+  .form-buttons button {
+    font-size: 1.6rem;
+  }
+
+  .search-button,
+  .nav-button,
+  .today-button,
+  .view-button,
+  .reset-button {
+    padding: 5px 11px;
+    font-size: 1.6rem;
+  }
+
+  .current-date {
+    font-size: 1.6rem;
+  }
+}
+
+/* Calendar with Same Background Color as Sidebar */
+#calendar {
+  background-color: rgba(51, 51, 51, 0.8);
+  border-radius: 5px;
+}
+
+#calendar .fc-toolbar {
+  background-color: rgba(51, 51, 51, 0.8);
+  padding: 10px;
+  border-radius: 5px;
+}
+
+#calendar .fc-view-harness {
+  margin-top: 10px;
+  max-height: 700px;
+}
+
+/* Buttons in Calendar */
+.fc .fc-button-primary {
+  background-color: rgba(51, 51, 51, 0.8);
+  border-color: rgba(42, 42, 42, 0.8);
+  color: #FFFFFF;
+}
+
+.fc .fc-button-primary:hover {
+  background-color: rgba(42, 42, 42, 0.8);
+}
+
+.fc .fc-toolbar-title {
+  font-size: 1em;
+  margin: 0;
+  color: #FFFFFF;
+}

@@ -20,5 +20,9 @@
     <div class="button-container">
       <img src="img/dark-mode.png" alt="Przycisk do zmiany trybu nocnego" id="darkModeToggle">
     </div>
+    <div class="button-container">
+      <img src="img/cb-mode.png" alt="Przycisk do zmiany trybu dla daltonistów" id="colorBlindModeToggle">
+    </div>
+
   </div>
 </header>

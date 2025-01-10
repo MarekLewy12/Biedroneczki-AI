@@ -1,0 +1,322 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+}
+
+html {
+  color: #000000;
+  font-size: 1em;
+  line-height: 1.4;
+}
+
+body {
+  padding: 80px;
+  background-color: #000000;
+  color: #FFFF00;
+}
+
+/* Nagłówek */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  background-color: #000000;
+}
+
+.header img {
+  height: 50px;
+  width: auto;
+}
+
+.buttons {
+  display: flex;
+  gap: 15px;
+}
+
+.button-container {
+  background-color: #FFFF00;
+  border-radius: 50%;
+  padding: 5px;
+  height: 50px;
+  width: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: transform 0.3s, background-color 0.3s;
+}
+
+.button-container:hover {
+  cursor: pointer;
+  transform: scale(1.1);
+  background-color: #FFD700;
+}
+
+.button-container img {
+  max-width: 100%;
+  max-height: 100%;
+}
+
+/* Informacja o skali czcionki */
+.font-scale-info {
+  color: #000000;
+}
+
+/* Main Content */
+.main {
+  padding: 32px;
+}
+
+.main-container {
+  display: flex;
+  gap: 2rem;
+}
+
+/* Sidebar */
+.sidebar {
+  width: 300px;
+  min-height: 600px;
+  background-color: #1a1a1a;
+  border-radius: 8px;
+}
+
+/* Schedule */
+.schedule-container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.schedule-grid {
+  flex: 1;
+  min-height: 500px;
+  background-color: #1a1a1a;
+  border-radius: 8px;
+}
+
+/* Sidebar Search Form */
+.search-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  padding: 16px;
+}
+
+.search-form label {
+  font-weight: bold;
+  font-size: 0.9rem;
+  color: #FFFF00;
+}
+
+.search-form input {
+  padding: 8px;
+  border: 1px solid #FFD700;
+  border-radius: 5px;
+  font-size: 0.9rem;
+  background-color: #333333;
+  color: #FFFF00;
+}
+
+.form-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* Buttons */
+.search-button,
+.nav-button,
+.today-button,
+.view-button,
+.reset-button {
+  background-color: #FFFF00;
+  color: #000000;
+  border: none;
+  border-radius: 15px;
+  padding: 8px 16px;
+  cursor: pointer;
+  font-size: 0.9rem;
+}
+
+.search-button:hover,
+.nav-button:hover,
+.today-button:hover,
+.view-button:hover,
+.reset-button:hover {
+  background-color: #FFD700;
+}
+
+/* Reset Button */
+.reset-button {
+  background-color: #FFA500;
+  color: #000000;
+}
+
+.reset-button:hover {
+  background-color: #FF8C00;
+}
+
+/* Schedule Header */
+.schedule-header {
+  display: flex;
+  align-items: center;
+  background-color: #1a1a1a;
+  padding: 16px;
+  border-radius: 8px;
+}
+
+.left-nav,
+.center-nav,
+.right-nav {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.current-date {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #FFFF00;
+}
+
+/* View Buttons */
+.view-buttons {
+  display: flex;
+  gap: 10px;
+}
+
+.view-button {
+  background-color: #FFD700;
+  color: #000000;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.view-button:hover {
+  background-color: #FFC107;
+}
+
+/* Responsywność dla urządzeń mobilnych */
+@media (max-width: 1024px) {
+  body {
+    padding: 8px;
+  }
+
+  .header {
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .header img {
+    height: 50px;
+    width: auto;
+  }
+
+  .main {
+    padding: 16px;
+  }
+
+  .main-container {
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .sidebar {
+    width: 100%;
+    min-height: auto;
+  }
+
+  .schedule-container {
+    width: 100%;
+    overflow: hidden;
+  }
+
+  .current-date {
+    font-size: 0.8rem;
+  }
+
+  .view-buttons {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .schedule-grid {
+    min-height: 350px;
+  }
+
+  .search-form {
+    padding: 8px;
+  }
+
+  .search-form input {
+    font-size: 0.8rem;
+  }
+
+  .search-form label {
+    font-size: 1rem;
+  }
+
+  .form-buttons {
+    flex-direction: row;
+    justify-content: center;
+    margin-bottom: 1rem;
+    gap: 5rem;
+  }
+
+  .form-buttons button {
+    font-size: 1.6rem;
+  }
+
+  .search-button,
+  .nav-button,
+  .today-button,
+  .view-button,
+  .reset-button {
+    padding: 5px 11px;
+    font-size: 1.6rem;
+  }
+
+  .current-date {
+    font-size: 1.6rem;
+  }
+}
+
+
+#calendar {
+  background-color: #000000;
+  border-radius: 5px;
+}
+
+#calendar .fc-toolbar {
+  background-color: #1a1a1a;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+#calendar .fc-view-harness {
+  margin-top: 10px;
+  max-height: 700px;
+}
+
+
+.fc .fc-button-primary {
+  background-color: #FFFF00;
+  border-color: #FFD700;
+  color: #000000;
+}
+
+.fc .fc-button-primary:hover {
+  background-color: #FFC107;
+}
+
+.fc .fc-toolbar-title {
+  font-size: 1em;
+  margin: 0;
+  color: #FFFF00;
+}
