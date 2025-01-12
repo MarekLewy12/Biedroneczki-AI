@@ -158,6 +158,18 @@ body {
   background-color: #3f51b5;
 }
 
+/* Dodanie stylu wyłączenia dla przycisku */
+.search-button.disabled {
+  background-color: #cccccc;
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+
+.search-button.disabled:hover {
+  background-color: #cccccc;
+  transform: none;
+}
+
 /* Przycisk 'Wyczyść' */
 .reset-button {
   background-color: #ec7f88;
@@ -363,6 +375,27 @@ body {
   margin: 0;
 }
 
+/* Responsywność toolbara */
+@media (max-width: 768px) {
+  .fc-header-toolbar {
+    justify-content: center;
+    flex-direction: column;
+    gap: 0.8rem;
+  }
+
+  .fc-toolbar-chunk {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+  }
+
+  .fc-button-group {
+    width: 100%;
+    justify-content: center;
+    gap: 8px;
+  }
+}
+
 .save-message {
   position: fixed;
   bottom: 10px;
@@ -539,3 +572,111 @@ body {
   content: "⏱️";
 }
 
+/* STATYSTYKI */
+.statistics-page {
+  padding: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.statistics-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.statistics-header h1 {
+  color: #333;
+  font-size: 1.8rem;
+}
+
+.back-button {
+  padding: 0.75rem 1.5rem;
+  background: #5c6bc0;
+  color: white;
+  text-decoration: none;
+  border-radius: 4px;
+  transition: background-color 0.2s;
+  font-weight: 500;
+}
+
+.back-button:hover {
+  background: #3f51b5;
+}
+
+.statistics-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+}
+
+.stat-card {
+  background: white;
+  border-radius: 12px;
+  padding: 2rem;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  transition: transform 0.2s;
+}
+
+.stat-card:hover {
+  transform: translateY(-2px);
+}
+
+.stat-info h3 {
+  color: #666;
+  margin-bottom: 1rem;
+  font-size: 1.1rem;
+}
+
+.stat-info p {
+  font-size: 3rem;
+  font-weight: bold;
+  color: #5c6bc0;
+  margin-bottom: 0.5rem;
+}
+
+.stat-info small {
+  display: block;
+  color: #888;
+  font-size: 0.9rem;
+  line-height: 1.4;
+}
+
+.stat-icon {
+  font-size: 2.5rem;
+  opacity: 0.2;
+}
+
+/* Responsywność */
+@media (max-width: 768px) {
+  .statistics-page {
+    padding: 1rem;
+  }
+
+  .statistics-header {
+    flex-direction: column;
+    gap: 1rem;
+    text-align: center;
+  }
+
+  .stat-card {
+    padding: 1.5rem;
+  }
+
+  .stat-info p {
+    font-size: 2.5rem;
+  }
+}
+.statistics-button {
+  text-decoration: none;
+  text-align: center;
+  color: inherit;
+}
+
+.statistics-button::before {
+  content: "📊";
+}

@@ -53,4 +53,12 @@ class ScheduleController
     http_response_code(500); // wywołujemy błąd 500
     echo json_encode(['error' => 'Testowy błąd API']);
   }
+
+  public function statistics()
+  {
+    include __DIR__ . '/../Views/layouts/header.php';
+    echo '<main class="main">';
+    include __DIR__ . '/../Views/components/statistics.php';
+    echo '</main>';
+  }
 }

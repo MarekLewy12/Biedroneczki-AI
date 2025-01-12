@@ -15,6 +15,9 @@
       <button onclick="window.errorHandler.testTimeoutError()" class="test-button">
         Test timeout
       </button>
+      <a href="/statistics" class="test-button statistics-button">
+        Statystyki
+      </a>
     </div>
   </div>
 </div>

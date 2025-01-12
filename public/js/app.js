@@ -1,7 +1,15 @@
 import { fetchData } from "./api.js";
 import ErrorHandler from "./errorHandler.js";
-// globalna instancja
-window.errorHandler = new ErrorHandler();
+import Statistics from "./statistics.js";
+
+window.statistics = new Statistics(); // globalna instancja statystyk
+document.addEventListener('DOMContentLoaded', () => {
+  // Inicjalizacja statystyk dopiero po załadowaniu DOM w celu uniknięcia błędów
+  window.statistics.init();
+
+  // globalna instancja obsługi błędów
+  window.errorHandler = new ErrorHandler();
+});
 
 // ------------------------------
 // TRYB DLA DALTONISTOW
@@ -102,6 +110,9 @@ saveButton.addEventListener('click', () => {
   const saveMessage = document.getElementById('saveMessage');
   saveMessage.style.display = 'block';
 
+  // Inkrmentacja licznika zapisów
+  window.statistics.incrementSavedPlans();
+
   // ukrycie komunikatu po 3 sekundach
   setTimeout(() => {
     saveMessage.style.display = 'none';
@@ -151,6 +162,48 @@ calendar.render();
 // OBSŁUGA FORMULARZA WYSZUKIWANIA I AKTUALIZACJA KALENDARZA
 // ------------------------------
 const form = document.getElementById('searchForm');
+const searchButton = form.querySelector('.search-button');
+
+// Prosta walidacja po stronie klienta - przycisk wyszukiwania jest aktywny tylko gdy przynajmniej jedno pole jest wypełnione
+function validateForm() {
+  const inputs = form.querySelectorAll('input');
+
+  // Sprawdzenie czy którekolwiek z pól jest wypełnione
+  const isAnyFieldFilled = Array.from(inputs).some(input => input.value.trim() !== '');
+
+  // Aktywacja przycisku wyszukiwania jeśli którykolwiek z pól jest wypełnione
+  searchButton.disabled = !isAnyFieldFilled;
+
+  // Dodanie klas w zależności od wypełnienia pól
+  if (isAnyFieldFilled) {
+    searchButton.classList.remove('disabled');
+  } else {
+    searchButton.classList.add('disabled');
+  }
+}
+
+// Nasłuchuj zmian w polach formularza
+form.addEventListener('input', validateForm);
+
+validateForm(); // Sprawdzenie stanu formularza na starcie
+
+// Logika czyszczenia formularza
+const resetButton = form.querySelector('.reset-button');
+
+resetButton.addEventListener('click', (event) => {
+  event.preventDefault();
+
+  form.reset(); // Wyczyszczenie formularza
+
+  // Czyszczenie kalendarza z wydarzeń
+  calendar.removeAllEvents();
+
+  // Aktualizacja adresu URL
+  const newUrl = window.location.pathname;
+  window.history.pushState({path: newUrl}, '', newUrl);
+
+  validateForm(); // Sprawdzenie stanu formularza
+});
 
 form.addEventListener('submit', async (event) => {
   event.preventDefault();
@@ -184,6 +237,9 @@ form.addEventListener('submit', async (event) => {
     const response = await fetchData(formData);
     // response zawiera już dane w formacie JSON zwrócone z backendu dzięki funkcji fetchData
     console.log('dane zwrócone przez API:', response);
+
+    // Inkrementacja licznika wygenerowanych planów
+    window.statistics.incrementGeneratedPlans();
 
     // Przetworzenie danych
     const events = response.slice(1); // pominięcie nagłówka ponieważ jest on pusty
