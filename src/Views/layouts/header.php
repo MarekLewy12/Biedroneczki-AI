@@ -23,6 +23,10 @@
     <div class="button-container">
       <img src="img/cb-mode.png" alt="Przycisk do zmiany trybu dla daltonistów" id="colorBlindModeToggle">
     </div>
+    <div class="button-container">
+      <img src="img/save.png" alt="Przycisk do zapisu ostatniego widoku" id="lastViewSave">
+    </div>
+
 
   </div>
 </header>

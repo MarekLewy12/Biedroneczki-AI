@@ -31,16 +31,6 @@ const toggleColorBlindMode = () => {
 // Podłączenie funkcji do przycisku
 colorBlindModeToggle.addEventListener('click', toggleColorBlindMode);
 
-
-
-
-
-
-
-
-
-
-
 // ------------------------------
 // TRYB CIEMNY
 // ------------------------------
@@ -88,6 +78,22 @@ const changePageFontScale = () => {
 };
 
 fontIncreaseButton.addEventListener('click', changePageFontScale);
+
+// ------------------------------
+// LOCAL STORAGE
+// ------------------------------
+// Funkcja zapisująca obecny widok do localStorage
+const saveButton = document.getElementById('lastViewSave');
+saveButton.addEventListener('click', () => {
+  // Pobierz bieżący URL
+  const currentUrl = window.location.href;
+
+  // Zapisz URL
+  localStorage.setItem('lastViewUrl', currentUrl);
+
+  //  komunikat potwierdzenia
+  console.log('Obecny URL został zapisany:', currentUrl);
+});
 
 // ------------------------------
 // RENDEROWANIE PUSTEGO KALENDARZA

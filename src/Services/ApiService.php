@@ -65,7 +65,7 @@ class ApiService
     // Dodaj daty (początek i koniec tygodnia)
     // TODO: Pobierać daty po kliknięciu strzałek w kalendarzu
     $queryParams['start'] = date('Y-m-d');
-    $queryParams['end'] = date('Y-m-d', strtotime('+1 week'));
+    $queryParams['end'] = date('Y-m-d', strtotime('+2 week'));
 
     return $queryParams;
   }
