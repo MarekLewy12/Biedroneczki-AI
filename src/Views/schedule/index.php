@@ -7,4 +7,5 @@
   <div class="schedule-grid">
     <div id="calendar"></div>
   </div>
+  <?php include __DIR__ . '/../components/errorMessage.php'; ?>
 </div>

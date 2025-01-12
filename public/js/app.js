@@ -1,4 +1,8 @@
 import { fetchData } from "./api.js";
+import ErrorHandler from "./errorHandler.js";
+// globalna instancja
+window.errorHandler = new ErrorHandler();
+
 // ------------------------------
 // TRYB DLA DALTONISTOW
 // ------------------------------
@@ -93,6 +97,15 @@ saveButton.addEventListener('click', () => {
 
   //  komunikat potwierdzenia
   console.log('Obecny URL został zapisany:', currentUrl);
+
+  // dodatkowy komunikat na stronie
+  const saveMessage = document.getElementById('saveMessage');
+  saveMessage.style.display = 'block';
+
+  // ukrycie komunikatu po 3 sekundach
+  setTimeout(() => {
+    saveMessage.style.display = 'none';
+  }, 3000);
 });
 
 // ------------------------------
@@ -193,9 +206,8 @@ form.addEventListener('submit', async (event) => {
     // Dodanie nowych wydarzeń
     calendar.addEventSource(fullCalendarEvents);
 
-
   } catch (error) {
-    console.error('Wystąpił błąd podczas wysyłania formularza:', error.message);
-    // TODO: Wyświetl komunikat o błędzie na stronie
+    console.error('Błąd:', error);
+    window.errorHandler.showError(error.message); // wyświetlenie błędu
   }
 });

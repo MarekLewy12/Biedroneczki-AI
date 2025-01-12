@@ -46,4 +46,11 @@ class ScheduleController
       echo json_encode(['error' => $e->getMessage()]);
     }
   }
+
+  public function testError()
+  {
+    header('Content-Type: application/json');
+    http_response_code(500); // wywołujemy błąd 500
+    echo json_encode(['error' => 'Testowy błąd API']);
+  }
 }

@@ -13,6 +13,7 @@ use App\Controllers\ScheduleController;
 $router = new Router();
 $router->addRoute('/', ScheduleController::class, 'index');
 $router->addRoute('/search', ScheduleController::class, 'search');
+$router->addRoute('/api/test-error', ScheduleController::class, 'testError'); // testowy błąd API
 
 // Obsługa żądań API
 if (strpos($_SERVER['REQUEST_URI'], '/search') === 0) {
@@ -46,6 +47,7 @@ if (strpos($_SERVER['REQUEST_URI'], '/search') === 0) {
   try {
     // Przekierowanie żądania na odpowiednią akcję kontrolera
     $router->dispatch($_SERVER['REQUEST_URI']);
+    include __DIR__ . '/../src/Views/components/testPanel.php';
   } catch (Exception $e) {
     die('Wystąpił błąd: ' . $e->getMessage());
   }

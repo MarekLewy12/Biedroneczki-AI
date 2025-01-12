@@ -362,3 +362,180 @@ body {
   font-size: 1em;
   margin: 0;
 }
+
+.save-message {
+  position: fixed;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #4caf50;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 5px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  font-size: 16px;
+}
+
+/* Obsługa błędów */
+.error-container {
+  position: fixed;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  padding: 20px;
+  max-width: 400px;
+  width: 90%;
+  z-index: 1000;
+  opacity: 0;
+  transition: all 0.3s ease-in-out;
+}
+
+/* Zawartość błędu */
+.error-content {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.error-icon {
+  font-size: 20px;
+  line-height: 1;
+}
+
+.error-text {
+  flex: 1;
+  font-size: 14px;
+  line-height: 1.5;
+  color: #333;
+}
+
+/* Przyciski */
+.error-close {
+  background: none;
+  border: none;
+  font-size: 20px;
+  color: #666;
+  cursor: pointer;
+  /*padding: 14px;*/
+  line-height: 1;
+}
+
+.error-close:hover {
+  color: #333;
+}
+
+.error-retry {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  background: #5c6bc0;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.2s;
+}
+
+.error-retry:hover {
+  background: #3f51b5;
+}
+
+/* Panel testowy */
+.test-panel {
+  position: fixed;
+  left: 10px;
+  bottom: 20px;
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  z-index: 900;
+  overflow: hidden;
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transform: translateX(-80%);
+  max-width: 300px;
+}
+
+.test-panel.visible {
+  transform: translateX(0) !important;
+}
+
+.test-panel-toggle {
+  padding: 16px;
+  width: 100%;
+  background: #5c6bc0;
+  border: none;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  color: white;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: background-color 0.2s;
+}
+
+.test-panel-toggle:hover {
+  background: #3f51b5;
+}
+
+.test-panel-content {
+  padding: 16px;
+  opacity: 0;
+  transition: all 0.3s ease;
+  background: #ffffff;
+}
+
+.test-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.test-button {
+  padding: 12px 16px;
+  border: none;
+  border-radius: 8px;
+  background: #f5f5f5;
+  color: #333333;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.test-button:hover {
+  background: #e0e0e0;
+  transform: translateY(-1px);
+}
+
+.test-button:active {
+  transform: translateY(0);
+}
+
+
+/* Ikony dla przycisków */
+.test-button::before {
+  font-size: 16px;
+}
+
+.test-button[onclick*="testApiError"]::before {
+  content: "🌐";
+}
+
+.test-button[onclick*="testValidationError"]::before {
+  content: "⚠️";
+}
+
+.test-button[onclick*="testTimeoutError"]::before {
+  content: "⏱️";
+}
+

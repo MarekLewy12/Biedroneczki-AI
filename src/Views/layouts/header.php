@@ -26,6 +26,7 @@
     <div class="button-container">
       <img src="img/save.png" alt="Przycisk do zapisu ostatniego widoku" id="lastViewSave">
     </div>
+    <div id="saveMessage" class="save-message" style="display: none">Pomyślnie zapisano do LocalStorage</div>
 
 
   </div>
