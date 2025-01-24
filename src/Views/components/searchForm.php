@@ -2,7 +2,8 @@
 ?>
 <form id="searchForm" class="search-form" method="post">
   <label for="teacher">Wykładowca</label>
-  <input type="text" id="teacher" name="teacher">
+  <input type="text" id="teacher" name="teacher" pattern="^[a-zA-ZąćęłńóśźżĄĆĘŁŃÓŚŹŻ\s]+$" title="Wprowadź tylko litery, bez cyfr i znaków specjalnych.">
+
 
   <label for="subject">Przedmiot</label>
   <input type="text" id="subject" name="subject">
@@ -14,7 +15,8 @@
   <input type="text" id="group" name="group">
 
   <label for="album">Numer Albumu</label>
-  <input type="text" id="album" name="album">
+  <input type="text" id="album" name="album" maxlength="5" pattern="^\d{5}$" title="Numer albumu musi składać się z dokładnie 5 cyfr.">
+
 
   <div class="form-buttons">
     <button class="search-button">Szukaj</button>

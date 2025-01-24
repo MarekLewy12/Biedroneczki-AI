@@ -190,6 +190,29 @@ validateForm(); // Sprawdzenie stanu formularza na starcie
 // Logika czyszczenia formularza
 const resetButton = form.querySelector('.reset-button');
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 resetButton.addEventListener('click', (event) => {
   event.preventDefault();
 
@@ -267,3 +290,7 @@ form.addEventListener('submit', async (event) => {
     window.errorHandler.showError(error.message); // wyświetlenie błędu
   }
 });
+
+
+
+
