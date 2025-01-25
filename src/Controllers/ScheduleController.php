@@ -29,23 +29,20 @@ class ScheduleController
   public function search()
   {
     try {
-      // Sprawdź czy mamy żądanie POST
-      if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-        throw new \Exception('Nieprawidłowa metoda żądania');
-      }
-
       // Pobierz dane z API
-      $scheduleData = $this->apiService->fetchScheduleData($_POST);
+      $scheduleData = $this->apiService->getSchedule($_POST);
 
-      // Zwróć odpowiedź w formacie JSON
+      // Ustaw odpowiedni nagłówek
       header('Content-Type: application/json');
-      echo json_encode($scheduleData);
 
+      // Zwróć dane w formacie JSON
+      echo $scheduleData;
     } catch (\Exception $e) {
       http_response_code(400);
       echo json_encode(['error' => $e->getMessage()]);
     }
   }
+
 
   public function testError()
   {

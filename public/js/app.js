@@ -228,6 +228,9 @@ resetButton.addEventListener('click', (event) => {
   validateForm(); // Sprawdzenie stanu formularza
 });
 
+
+
+
 form.addEventListener('submit', async (event) => {
   event.preventDefault();
 
@@ -289,6 +292,62 @@ form.addEventListener('submit', async (event) => {
     console.error('Błąd:', error);
     window.errorHandler.showError(error.message); // wyświetlenie błędu
   }
+});
+
+document.addEventListener('DOMContentLoaded', function() {
+  const form = document.getElementById('searchForm');
+  const calendarEl = document.getElementById('calendar');
+
+  // Inicjalizacja FullCalendar
+  const calendar = new FullCalendar.Calendar(calendarEl, {
+    plugins: ['dayGrid', 'interaction'],
+    events: [],  // Później wypełnimy danymi
+    dateClick: function(info) {
+      alert('Data kliknięta: ' + info.dateStr);
+    },
+  });
+
+  calendar.render(); // Renderowanie kalendarza
+
+  // Funkcja obsługująca wysyłanie formularza
+  form.addEventListener('submit', async function(e) {
+    e.preventDefault(); // Zapobiegamy domyślnemu działaniu formularza
+
+    const formData = new FormData(form); // Pobieramy dane formularza
+
+    try {
+      const response = await fetch('/search', {
+        method: 'POST',
+        body: formData, // Przesyłamy dane formularza
+      });
+
+      if (!response.ok) {
+        throw new Error('Błąd podczas pobierania danych');
+      }
+
+      const data = await response.json();
+
+      // Sprawdzamy, czy są dane
+      if (data && data.length > 0) {
+        // Tworzymy wydarzenia dla FullCalendar
+        const events = data.map(item => ({
+          title: `${item.subject_name} - ${item.worker_name}`,
+          start: item.start_time,
+          end: item.end_time,
+          description: `Sala: ${item.room}, Grupa: ${item.group_name}`,
+          color: item.color // Możesz ustawić kolor wydarzenia (jeśli jest dostępny)
+        }));
+
+        // Ustawiamy dane w kalendarzu
+        calendar.removeAllEvents(); // Usuwamy wszystkie poprzednie wydarzenia
+        calendar.addEventSource(events); // Dodajemy nowe wydarzenia
+      } else {
+        console.log('Brak wyników');
+      }
+    } catch (error) {
+      console.error('Wystąpił błąd:', error);
+    }
+  });
 });
 
 

@@ -1,23 +1,28 @@
 export async function fetchData(formData) {
   try {
-    // Wysłanie zapytania POST do endpointa /search
     const response = await fetch('/search', {
       method: 'POST',
-      body: formData,
+      body: formData, // Przekazanie danych z formularza
     });
 
-    // Obsługa błędów
     if (!response.ok) {
       throw new Error(`Błąd: ${response.status} - ${response.statusText}`);
     }
 
-    // Odpowiedź z serwera
+    // Sprawdź, czy odpowiedź jest JSON-em przed próbą parsowania
+    const contentType = response.headers.get('Content-Type');
+
+    if (!contentType || !contentType.includes('application/json')) {
+      throw new Error('Odpowiedź nie jest w formacie JSON');
+    }
+
+    // Odpowiedź powinna być JSON-em, więc możemy bezpiecznie ją sparsować
     const data = await response.json();
-    if (!data || data.length === 0) {  // sprawdzenie czy zwrócone dane nie są puste
+
+    if (!data || data.length === 0) {
       throw new Error('Brak wyników do wyświetlenia.');
     }
 
-    // Zwrócenie danych
     return data;
   } catch (error) {
     console.error('Wystąpił błąd w fetchData:', error.message);
