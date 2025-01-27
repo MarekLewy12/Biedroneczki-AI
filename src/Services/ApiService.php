@@ -111,8 +111,8 @@ class ApiService
       $params[] = 'number=' . urlencode($inputs['student_id']);
     }
 
-    $params[] = 'start=' . urlencode("2025-01-13T00:00:00+01:00");
-    $params[] = 'end=' . urlencode("2025-01-21T00:00:00+01:00");
+    $params[] = 'start=' . urlencode("2024-10-01T00:00:00+02:00");
+    $params[] = 'end=' . urlencode("2025-02-10T00:00:00+01:00");
 
     $url = $baseUrl . '?' . implode('&', $params);
     $response = @file_get_contents($url);
@@ -152,27 +152,46 @@ class ApiService
         throw new Exception("Brak group_name w danych lekcji. Nie można zapisać.");
       }
 
-      $groupSql = "
-                INSERT OR IGNORE INTO groups (group_name)
-                VALUES (:group_name)
-            ";
+      // Sprawdź czy lekcja już istnieje
+      $checkSql = "
+            SELECT COUNT(*)
+            FROM schedule s
+            INNER JOIN subjects subj ON s.subject_id = subj.subject_id
+            INNER JOIN workers w ON s.worker_id = w.worker_id
+            WHERE s.room = :room
+            AND s.start_time = :start_time
+            AND s.end_time = :end_time
+            AND s.group_name = :group_name";
+
+      $checkStmt = $this->pdo->prepare($checkSql);
+      $checkStmt->execute([
+        ':room' => $lesson['room'],
+        ':start_time' => $lesson['start'],
+        ':end_time' => $lesson['end'],
+        ':group_name' => $lesson['group_name']
+      ]);
+
+      if ($checkStmt->fetchColumn() > 0) {
+        $this->pdo->commit();
+        return; // lekcja już istnieje, pomijamy
+      }
+
+      // Dodaj lub pobierz grupę
+      $groupSql = "INSERT OR IGNORE INTO groups (group_name) VALUES (:group_name)";
       $groupStmt = $this->pdo->prepare($groupSql);
       $groupStmt->execute([':group_name' => $lesson['group_name']]);
 
-      $subjectIdQuery = "
-                SELECT subject_id
-                FROM subjects
-                WHERE subject_name = :subject_name
-            ";
+      // Dodaj lub pobierz przedmiot
+      $subjectIdQuery = "SELECT subject_id FROM subjects WHERE subject_name = :subject_name";
       $subjectIdStmt = $this->pdo->prepare($subjectIdQuery);
       $subjectIdStmt->execute([':subject_name' => $lesson['title']]);
       $subjectId = $subjectIdStmt->fetchColumn();
 
       if (!$subjectId) {
         $insertSubjectSql = "
-                    INSERT INTO subjects (subject_name, lesson_form, lesson_form_short)
-                    VALUES (:subject_name, :lesson_form, :lesson_form_short)
-                ";
+                INSERT INTO subjects (subject_name, lesson_form, lesson_form_short)
+                VALUES (:subject_name, :lesson_form, :lesson_form_short)
+            ";
         $insertSubjectStmt = $this->pdo->prepare($insertSubjectSql);
         $insertSubjectStmt->execute([
           ':subject_name' => $lesson['title'],
@@ -182,20 +201,17 @@ class ApiService
         $subjectId = $this->pdo->lastInsertId();
       }
 
-      $workerIdQuery = "
-                SELECT worker_id
-                FROM workers
-                WHERE worker_name = :worker_name
-            ";
+      // Dodaj lub pobierz prowadzącego
+      $workerIdQuery = "SELECT worker_id FROM workers WHERE worker_name = :worker_name";
       $workerIdStmt = $this->pdo->prepare($workerIdQuery);
       $workerIdStmt->execute([':worker_name' => $lesson['worker']]);
       $workerId = $workerIdStmt->fetchColumn();
 
       if (!$workerId) {
         $insertWorkerSql = "
-                    INSERT INTO workers (worker_name, title)
-                    VALUES (:worker_name, :title)
-                ";
+                INSERT INTO workers (worker_name, title)
+                VALUES (:worker_name, :title)
+            ";
         $insertWorkerStmt = $this->pdo->prepare($insertWorkerSql);
         $insertWorkerStmt->execute([
           ':worker_name' => $lesson['worker'],
@@ -204,18 +220,19 @@ class ApiService
         $workerId = $this->pdo->lastInsertId();
       }
 
+      // Dodaj zajęcia do harmonogramu
       $scheduleSql = "
-                INSERT INTO schedule (
-                    subject_id, worker_id, group_name, room,
-                    start_time, end_time, lesson_status,
-                    lesson_status_short, color, border_color
-                )
-                VALUES (
-                    :subject_id, :worker_id, :group_name, :room,
-                    :start_time, :end_time, :lesson_status,
-                    :lesson_status_short, :color, :border_color
-                )
-            ";
+            INSERT INTO schedule (
+                subject_id, worker_id, group_name, room,
+                start_time, end_time, lesson_status,
+                lesson_status_short, color, border_color
+            )
+            VALUES (
+                :subject_id, :worker_id, :group_name, :room,
+                :start_time, :end_time, :lesson_status,
+                :lesson_status_short, :color, :border_color
+            )
+        ";
       $scheduleStmt = $this->pdo->prepare($scheduleSql);
       $scheduleStmt->execute([
         ':subject_id' => $subjectId,
@@ -226,8 +243,8 @@ class ApiService
         ':end_time' => $lesson['end'],
         ':lesson_status' => $lesson['lesson_status'] ?? "planned",
         ':lesson_status_short' => $lesson['lesson_status_short'] ?? "PL",
-        ':color' => $lesson['color'] ?? "#FFFFFF",
-        ':border_color' => $lesson['borderColor'] ?? "#000000"
+        ':color' => $lesson['color'] ?? "#3788d8", // domyślny kolor FullCalendar
+        ':border_color' => $lesson['borderColor'] ?? "#3788d8"
       ]);
 
       $this->pdo->commit();
@@ -275,7 +292,7 @@ class ApiService
 //try {
 //  $sApi = new ApiService();
 //  $res = $sApi->getSchedule([
-//    'student_id' => 53734
+//    'student_id' => 51031
 //  ]);
 //  echo $res;
 //} catch (Exception $e) {

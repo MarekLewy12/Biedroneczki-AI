@@ -1,6 +1,8 @@
 <?php
 $config = [];
-$config['db_dsn'] = 'sqlite:C:\Users\Kapi\Desktop\studia\sem5\ai1\a1\projekt_zespolowy\Biedroneczki-AI\data.db';
+
+$dbPath = dirname(__DIR__) . '/data.db';
+$config['db_dsn'] = 'sqlite:' . $dbPath; // zmiana ścieżki
 $config['db_user'] = ''; // Pusty, ponieważ SQLite nie wymaga użytkownika
 $config['db_pass'] = ''; // Pusty, ponieważ SQLite nie wymaga hasła
 

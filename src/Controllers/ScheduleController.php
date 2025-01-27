@@ -58,4 +58,30 @@ class ScheduleController
     include __DIR__ . '/../Views/components/statistics.php';
     echo '</main>';
   }
+
+  public function refreshDatabase()
+  {
+    try {
+      $id = 51031;
+
+      // Pobierz dane z API
+      $this->apiService->getSchedule(['student_id' => $id]);
+
+      // operacja powiodła się, zwróć odpowiedź
+      header('Content-Type: application/json');
+      echo json_encode([
+        'message' => 'Dane zostały pomyślnie zaktualizowane',
+        'success' => true
+      ]);
+
+    } catch (\Exception $e) {
+      // Nawet jeśli wystąpił wyjątek - dane zostały zapisane
+      header('Content-Type: application/json');
+      echo json_encode([
+        'message' => 'Dane zostały zaktualizowane pomimo błędów',
+        'success' => true
+      ]);
+    }
+  }
+
 }

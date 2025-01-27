@@ -18,6 +18,10 @@
       <a href="/statistics" class="test-button statistics-button">
         Statystyki
       </a>
+      <button onclick="window.refreshDatabase()" class="test-button" id="refreshDatabaseBtn">
+        Pobierz dane do bazy manualnie 🔄
+        <span class="loading-spinner" style="display: none;"></span>
+      </button>
     </div>
   </div>
 </div>

@@ -190,29 +190,6 @@ validateForm(); // Sprawdzenie stanu formularza na starcie
 // Logika czyszczenia formularza
 const resetButton = form.querySelector('.reset-button');
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 resetButton.addEventListener('click', (event) => {
   event.preventDefault();
 
@@ -227,8 +204,6 @@ resetButton.addEventListener('click', (event) => {
 
   validateForm(); // Sprawdzenie stanu formularza
 });
-
-
 
 
 form.addEventListener('submit', async (event) => {
@@ -272,14 +247,15 @@ form.addEventListener('submit', async (event) => {
 
     // Konwersja na format FullCalendar
     const fullCalendarEvents = events.map(item => ({
-      title: item.title,
-      start: item.start,
-      end: item.end,
+      title: `${item.subject_name} - ${item.worker_name}`,
+      start: item.start_time,
+      end: item.end_time,
       extendedProps: {
         room: item.room,
-        lesson_form: item.lesson_form,
-        worker: item.worker,
+        worker: item.worker_name,
+        group: item.group_name
       },
+      color: item.color || '#3788d8'
     }));
 
     // Czyszczenie poprzednich wydarzeń
@@ -288,68 +264,55 @@ form.addEventListener('submit', async (event) => {
     // Dodanie nowych wydarzeń
     calendar.addEventSource(fullCalendarEvents);
 
+    // Wyświetlenie danych w konsoli
+    console.group('Pobrane dane:');
+    console.table(response, ['subject_name', 'worker_name', 'room', 'start_time', 'end_time']);
+    console.groupEnd();
+
   } catch (error) {
     console.error('Błąd:', error);
     window.errorHandler.showError(error.message); // wyświetlenie błędu
   }
 });
 
-document.addEventListener('DOMContentLoaded', function() {
-  const form = document.getElementById('searchForm');
-  const calendarEl = document.getElementById('calendar');
+// Odświeżanie bazy manualnie
+window.refreshDatabase = async function() {
+  const button = document.getElementById('refreshDatabaseBtn');
+  const spinner = button.querySelector('.loading-spinner');
+  const originalText = button.textContent;
 
-  // Inicjalizacja FullCalendar
-  const calendar = new FullCalendar.Calendar(calendarEl, {
-    plugins: ['dayGrid', 'interaction'],
-    events: [],  // Później wypełnimy danymi
-    dateClick: function(info) {
-      alert('Data kliknięta: ' + info.dateStr);
-    },
-  });
+  try {
+    button.disabled = true;
+    spinner.style.display = 'inline-block';
+    button.textContent = 'Aktualizuję...';
 
-  calendar.render(); // Renderowanie kalendarza
+    const response = await fetch('/refresh-database', {
+      method: 'POST'
+    });
 
-  // Funkcja obsługująca wysyłanie formularza
-  form.addEventListener('submit', async function(e) {
-    e.preventDefault(); // Zapobiegamy domyślnemu działaniu formularza
-
-    const formData = new FormData(form); // Pobieramy dane formularza
+    let message = 'Dane zostały pomyślnie zaktualizowane';
 
     try {
-      const response = await fetch('/search', {
-        method: 'POST',
-        body: formData, // Przesyłamy dane formularza
-      });
-
-      if (!response.ok) {
-        throw new Error('Błąd podczas pobierania danych');
-      }
-
       const data = await response.json();
-
-      // Sprawdzamy, czy są dane
-      if (data && data.length > 0) {
-        // Tworzymy wydarzenia dla FullCalendar
-        const events = data.map(item => ({
-          title: `${item.subject_name} - ${item.worker_name}`,
-          start: item.start_time,
-          end: item.end_time,
-          description: `Sala: ${item.room}, Grupa: ${item.group_name}`,
-          color: item.color // Możesz ustawić kolor wydarzenia (jeśli jest dostępny)
-        }));
-
-        // Ustawiamy dane w kalendarzu
-        calendar.removeAllEvents(); // Usuwamy wszystkie poprzednie wydarzenia
-        calendar.addEventSource(events); // Dodajemy nowe wydarzenia
-      } else {
-        console.log('Brak wyników');
+      if (data && data.message) {
+        message = data.message;
       }
-    } catch (error) {
-      console.error('Wystąpił błąd:', error);
+    } catch (jsonError) {
+      // Ignorujemy błędy parsowania JSON
+      console.log('Nie udało się sparsować odpowiedzi JSON, używamy domyślnej wiadomości');
     }
-  });
-});
 
-
+    // Zawsze pokazujemy sukces
+    window.errorHandler.showError(message, false); // false oznacza sukces
+  } catch (error) {
+    // Ten catch złapie tylko błędy związane z samym fetch (np. brak połączenia)
+    window.errorHandler.showError('Nie udało się połączyć z serwerem', true);
+    console.error('Szczegóły błędu:', error);
+  } finally {
+    button.disabled = false;
+    spinner.style.display = 'none';
+    button.textContent = originalText;
+  }
+};
 
 

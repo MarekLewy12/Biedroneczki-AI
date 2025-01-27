@@ -15,6 +15,7 @@ $router->addRoute('/', ScheduleController::class, 'index');
 $router->addRoute('/search', ScheduleController::class, 'search');
 $router->addRoute('/api/test-error', ScheduleController::class, 'testError'); // testowy błąd API
 $router->addRoute('/statistics', ScheduleController::class, 'statistics'); // statystyki
+$router->addRoute('/refresh-database', ScheduleController::class, 'refreshDatabase'); // odświeżanie bazy danych
 
 // Obsługa żądań API
 if (strpos($_SERVER['REQUEST_URI'], '/search') === 0) {
