@@ -1,4 +1,4 @@
-import { fetchData } from "./api.js";
+import {fetchData} from "./api.js";
 import ErrorHandler from "./errorHandler.js";
 import Statistics from "./statistics.js";
 
@@ -235,9 +235,21 @@ form.addEventListener('submit', async (event) => {
   window.history.pushState({path: newUrl}, '', newUrl);
 
   try {
-    const response = await fetchData(formData);
+    let response = await fetchData(formData);
     // response zawiera już dane w formacie JSON zwrócone z backendu dzięki funkcji fetchData
     console.log('dane zwrócone przez API:', response);
+
+    if (response.status === 'fetching') {
+      window.errorHandler.showError("Pobieram dane dla nowego studenta...", false);
+      console.log("Pobieram dane")
+
+      // Poczekaj chwilę i spróbuj ponownie pobrać dane
+      setTimeout(async () => {
+        // Zaktualizuj kalendarz nowymi danymi
+        response = await fetchData(formData);
+      }, 3000);
+      return;
+    }
 
     // Inkrementacja licznika wygenerowanych planów
     window.statistics.incrementGeneratedPlans();

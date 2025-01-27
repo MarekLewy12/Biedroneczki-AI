@@ -19,7 +19,7 @@ try {
 
   // Pobierz dane dla zakresu numerów albumów
   $startId = 51000;
-  $endId = 51100;
+  $endId = 51050;
 
   for ($id = $startId; $id <= $endId; $id++) {
     echo "Pobieranie danych dla studenta $id...\n";

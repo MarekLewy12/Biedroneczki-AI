@@ -31,6 +31,12 @@ class ApiService
 
   public function getSchedule(array $inputs): string
   {
+    if (!empty($inputs['student_id'])) {
+      if (!$this->studentExistsInDatabase($inputs['student_id'])) {
+        $this->fetchExternalSchedule($inputs);
+      }
+    }
+
     // Zaloguj dane wejściowe
     error_log(print_r($inputs, true)); // Zalogowanie danych w logu
 
@@ -88,6 +94,12 @@ class ApiService
 
   private function fetchExternalSchedule(array $inputs): array
   {
+    if (empty($inputs['student_id']) && empty($inputs['album'])) {
+      throw new Exception("Brak numeru albumu studenta.");
+    }
+
+    $studentId = $inputs['student_id'] ?? $inputs['album'];
+
     $baseUrl = "https://plan.zut.edu.pl/schedule_student.php";
     $params = [];
 
@@ -254,12 +266,19 @@ class ApiService
     }
   }
 
-  function saveStudentToDatabase($student_id): void
-  {
-    $studentSql = "
-            INSERT OR REPLACE INTO students (student_id)
-            VALUES (:student_id)
-        ";
+  private function studentExistsInDatabase($student_id): bool {
+    $sql = "SELECT COUNT(*) FROM students WHERE student_id = :student_id";
+    $stmt = $this->pdo->prepare($sql);
+    $stmt->execute([':student_id' => $student_id]);
+    return $stmt->fetchColumn() > 0;
+  }
+
+  function saveStudentToDatabase($student_id): void {
+    if (empty($student_id)) {
+      throw new Exception("Nie można zapisać studenta bez numeru albumu.");
+    }
+
+    $studentSql = "INSERT OR REPLACE INTO students (student_id) VALUES (:student_id)";
     $stmt = $this->pdo->prepare($studentSql);
     $stmt->execute([':student_id' => $student_id]);
   }

@@ -62,10 +62,13 @@ class ScheduleController
   public function refreshDatabase()
   {
     try {
-      $id = 51031;
+      $startId = 51000;
+      $endId = 51050;
 
       // Pobierz dane z API
-      $this->apiService->getSchedule(['student_id' => $id]);
+      for ($id = $startId; $id <= $endId; $id++) {
+        $this->apiService->getSchedule(['student_id' => $id]);
+      }
 
       // operacja powiodła się, zwróć odpowiedź
       header('Content-Type: application/json');

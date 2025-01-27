@@ -15,7 +15,7 @@
   <input type="text" id="group" name="group">
 
   <label for="album">Numer Albumu</label>
-  <input type="text" id="album" name="album" maxlength="5" pattern="^\d{5}$" title="Numer albumu musi składać się z dokładnie 5 cyfr.">
+  <input type="text" id="album" name="student_id" maxlength="5" pattern="^\d{5}$" title="Numer albumu musi składać się z dokładnie 5 cyfr.">
 
 
   <div class="form-buttons">
